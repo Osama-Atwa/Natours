@@ -1,0 +1,132 @@
+.navigation {
+  &_input {
+    display: none;
+  }
+  &_button {
+    cursor: pointer;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background-color: $color-white;
+    z-index: 2000;
+    text-align: center;
+    box-shadow: 0 1rem 2.5rem rgba($color-black, 0.15);
+  }
+  &_background {
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    );
+    z-index: 1000;
+    transition: all 0.8s cubic-bezier(1, 0.01, 0.09, 1.62);
+  }
+  &_nav {
+    height: 100vh;
+    top: 0;
+    right: 0;
+    z-index: 1500;
+    position: fixed;
+    opacity: 0;
+    width: 0%;
+    transition: all 0.8s cubic-bezier(1, 0.01, 0.09, 1.62);
+  }
+  &_list {
+    @include CenterVH;
+    list-style: none;
+  }
+  &_item {
+    text-align: center;
+    margin: 1rem;
+  }
+
+  &_link {
+    & span {
+      display: inline-block;
+      margin-right: 1.5rem;
+    }
+    &:link,
+    &:visited {
+      display: inline-block;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      font-size: 3rem;
+      font-weight: 300;
+      color: $color-white;
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+      background-size: 230%;
+      transition: all 0.2s ease-in-out;
+    }
+    &:hover {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+
+  &_input:checked ~ &_nav {
+    opacity: 1;
+    width: 100%;
+  }
+  &_input:checked ~ &_background {
+    transform: scale(80);
+  }
+
+  &_icon {
+    position: relative;
+    margin-top: 3.5rem;
+
+    &,
+    &::before,
+    &::after {
+      display: inline-block;
+      width: 3rem;
+      height: 2px;
+      background-color: $color-gray-dark-3;
+      transition: all 0.2s;
+    }
+
+    &::after,
+    &::before {
+      position: absolute;
+      left: 0;
+      content: "";
+    }
+    &::before {
+      top: -0.8rem;
+    }
+    &::after {
+      top: 0.8rem;
+    }
+  }
+  &_button:hover &_icon::before {
+    top: -1rem;
+  }
+  &_button:hover &_icon::after {
+    top: 1rem;
+  }
+  &_input:checked + &_button &_icon {
+    background-color: transparent;
+  }
+  &_input:checked + &_button &_icon::after {
+    transform: rotate(135deg);
+    top: 0;
+  }
+  &_input:checked + &_button &_icon::before {
+    transform: rotate(-135deg);
+    top: 0;
+  }
+}
